@@ -5,8 +5,12 @@ def test_grid():
     grid = Grid([".#.", "..#"])
 
     assert grid[0, 0] == "."
-    assert grid[1, 1] == "."
+    assert grid[0, 1] == "#"
+    assert grid[0, 2] == "."
     assert grid[0, 3] == "."
+    assert grid[1, 0] == "."
+    assert grid[1, 1] == "."
+    assert grid[1, 2] == "#"
     assert grid[1, 3] == "."
 
 
