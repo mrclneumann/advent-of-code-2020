@@ -21,9 +21,8 @@ class Grid:
         return len(self.locations[0])
 
 
-def read_puzzle(filename):
-    with open(filename) as f:
-        return Grid([line.strip() for line in f])
+def read_input(file):
+    return Grid([line.strip() for line in file])
 
 
 def path_generator(dx, dy, limit):
@@ -34,23 +33,12 @@ def num_trees(grid, path):
     return sum(grid[row, col] == TREE for row, col in path)
 
 
-def part_01(puzzle):
-    return num_trees(puzzle, path_generator(3, 1, puzzle.height))
+def part_one(grid):
+    return num_trees(grid, path_generator(3, 1, grid.height))
 
 
-def part_02(puzzle):
+def part_two(grid):
     slopes = [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)]
     return math.prod(
-        num_trees(puzzle, path_generator(dx, dy, puzzle.height)) for dx, dy in slopes
+        num_trees(grid, path_generator(dx, dy, grid.height)) for dx, dy in slopes
     )
-
-
-def main():
-    puzzle = read_puzzle("../input/input_03.txt")
-
-    print(f"Part 01: {part_01(puzzle)}")
-    print(f"Part 02: {part_02(puzzle)}")
-
-
-if __name__ == "__main__":
-    main()
