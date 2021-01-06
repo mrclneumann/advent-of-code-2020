@@ -30,11 +30,6 @@ def input_path(tmp_path):
     return p
 
 
-# @pytest.fixture()
-# def passports(input_path):
-#     return read_input(input_path)
-
-
 def test_read_input(input_path):
     with input_path.open() as f:
         assert read_input(f) == [
@@ -75,7 +70,3 @@ def test_read_input(input_path):
                 "hgt": "59in",
             },
         ]
-
-
-# def test_num_valid_passports(passports):
-#     assert num_valid_passports(passports) == 2

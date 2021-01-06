@@ -1,9 +1,10 @@
 import re
+
 from schema import Schema, And, Use, Regex, Or
 
 
 def read_input(file):
-    return [parse_passport(p) for p in file.read().split("\n\n")]
+    return [parse_passport(line) for line in file.read().split("\n\n")]
 
 
 def parse_passport(passport):

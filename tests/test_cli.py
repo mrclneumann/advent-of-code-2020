@@ -94,11 +94,58 @@ def test_day_04(runner):
         assert result.output == "Part 1: 2\nPart 2: 2\n"
 
 
+def test_day_05(runner):
+    with runner.isolated_filesystem():
+        write_input_file(["BFFFBBFRRR", "FFFBBBFRRR", "BBFFBBFRLL"])
+
+        result = runner.invoke(main, ["5", "input.txt"])
+
+        assert result.output.startswith("Part 1: 820")
+
+
+def test_day_06(runner):
+    with runner.isolated_filesystem():
+        write_input_file(
+            [
+                "abc",
+                "",
+                "a",
+                "b",
+                "c",
+                "",
+                "ab",
+                "ac",
+                "",
+                "a",
+                "a",
+                "a",
+                "a",
+                "",
+                "b",
+            ]
+        )
+
+        result = runner.invoke(main, ["6", "input.txt"])
+
+        assert result.output == "Part 1: 11\nPart 2: 6\n"
+
+
+solution_test_data = [
+    (1, 989824, 66432240),
+    (2, 582, 729),
+    (3, 218, 3847183340),
+    (4, 230, 156),
+    (5, 806, 562),
+    (6, 6551, 3358),
+]
+
+
 @pytest.mark.parametrize(
     "day,part_one,part_two",
-    [(1, 989824, 66432240), (2, 582, 729), (3, 218, 3847183340), (4, 230, 156)],
+    solution_test_data,
+    ids=(f"day_{day:02d}" for day in (params[0] for params in solution_test_data)),
 )
-def test_solutions(day, part_one, part_two, runner):
-    result = runner.invoke(main, [str(day), f"../inputs/input_{day:02d}.txt"])
+def test_puzzle_solution(day, part_one, part_two, runner):
+    result = runner.invoke(main, [str(day), f"./inputs/input_{day:02d}.txt"])
 
     assert result.output == f"Part 1: {part_one}\nPart 2: {part_two}\n"

@@ -1,5 +1,5 @@
-from itertools import takewhile, count
 import math
+from itertools import takewhile, count
 
 TREE = "#"
 
