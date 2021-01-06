@@ -20,7 +20,7 @@ jobs:
           pip install -r requirements.txt
       - name: Install application
         run: |
-          pip install src/ .
+          pip install src/
       - name: Test with pytest
         run: |
           pytest
