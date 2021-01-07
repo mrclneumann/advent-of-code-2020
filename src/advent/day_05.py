@@ -26,6 +26,10 @@ def seat_id(boarding_pass):
     return row(boarding_pass) * 8 + col(boarding_pass)
 
 
+def missing(seat, seats):
+    return all([seat not in seats, seat - 1 in seats, seat + 1 in seats])
+
+
 def part_one(boarding_passes):
     return max(seat_id(p) for p in boarding_passes)
 
@@ -34,5 +38,5 @@ def part_two(boarding_passes):
     seats = {seat_id(p) for p in boarding_passes}
 
     for seat in range(min(seats) + 1, max(seats)):
-        if all([seat not in seats, seat - 1 in seats, seat + 1 in seats]):
+        if missing(seat, seats):
             return seat

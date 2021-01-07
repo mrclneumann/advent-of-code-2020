@@ -130,6 +130,27 @@ def test_day_06(runner):
         assert result.output == "Part 1: 11\nPart 2: 6\n"
 
 
+def test_day_07(runner):
+    with runner.isolated_filesystem():
+        write_input_file(
+            [
+                "light red bags contain 1 bright white bag, 2 muted yellow bags.",
+                "dark orange bags contain 3 bright white bags, 4 muted yellow bags.",
+                "bright white bags contain 1 shiny gold bag.",
+                "muted yellow bags contain 2 shiny gold bags, 9 faded blue bags.",
+                "shiny gold bags contain 1 dark olive bag, 2 vibrant plum bags.",
+                "dark olive bags contain 3 faded blue bags, 4 dotted black bags.",
+                "vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.",
+                "faded blue bags contain no other bags.",
+                "dotted black bags contain no other bags.",
+            ]
+        )
+
+        result = runner.invoke(main, ["7", "input.txt"])
+
+        assert result.output == "Part 1: 4\nPart 2: 32\n"
+
+
 solution_test_data = [
     (1, 989824, 66432240),
     (2, 582, 729),
@@ -137,6 +158,7 @@ solution_test_data = [
     (4, 230, 156),
     (5, 806, 562),
     (6, 6551, 3358),
+    (7, 101, 108636),
 ]
 
 
