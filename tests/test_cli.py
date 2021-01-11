@@ -173,6 +173,40 @@ def test_day_08(runner):
         assert result.output == "Part 1: 5\nPart 2: 8\n"
 
 
+def test_day_09(runner, monkeypatch):
+    monkeypatch.setattr("advent.day_09.PREAMBLE", 5)
+
+    with runner.isolated_filesystem():
+        write_input_file(
+            [
+                "35",
+                "20",
+                "15",
+                "25",
+                "47",
+                "40",
+                "62",
+                "55",
+                "65",
+                "95",
+                "102",
+                "117",
+                "150",
+                "182",
+                "127",
+                "219",
+                "299",
+                "277",
+                "309",
+                "576",
+            ]
+        )
+
+        result = runner.invoke(main, ["9", "input.txt"])
+
+        assert result.output == "Part 1: 127\nPart 2: 62\n"
+
+
 solution_test_data = [
     (1, 989824, 66432240),
     (2, 582, 729),
@@ -182,6 +216,7 @@ solution_test_data = [
     (6, 6551, 3358),
     (7, 101, 108636),
     (8, 1753, 733),
+    (9, 22406676, 2942387),
 ]
 
 

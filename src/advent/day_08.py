@@ -1,17 +1,16 @@
-from dataclasses import dataclass, field
-
-
 class InfiniteLoopDetected(Exception):
     pass
 
 
-@dataclass
 class Interpreter:
-    counter: int = 0
-    accumulator: int = 0
-    seen: set = field(default_factory=set)
+    def __init__(self) -> None:
+        self.counter = 0
+        self.accumulator = 0
+        self.seen = set()
 
     def interpret(self, program):
+        program = list(program)
+
         while True:
             if self.counter >= len(program):
                 return self.accumulator
@@ -61,16 +60,20 @@ def part_one(program):
 
 
 def part_two(program):
+    for candidate in generate_candidates(program):
+        interpreter = Interpreter()
+        try:
+            interpreter.interpret(candidate)
+        except InfiniteLoopDetected:
+            continue
+        else:
+            return interpreter.accumulator
+
+
+def generate_candidates(program):
     for index, (instruction, arg) in enumerate(program):
         if instruction in ("nop", "jmp"):
-            p = list(swap_instruction(program, index))
-            interpreter = Interpreter()
-            try:
-                interpreter.interpret(p)
-            except InfiniteLoopDetected:
-                continue
-            else:
-                return interpreter.accumulator
+            yield swap_instruction(program, index)
 
 
 def swap_instruction(program, counter):
