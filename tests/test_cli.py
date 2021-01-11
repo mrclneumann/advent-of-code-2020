@@ -1,6 +1,7 @@
 import pytest
-from advent.cli import main
 from click.testing import CliRunner
+
+from advent.cli import main
 
 
 @pytest.fixture(scope="module")
@@ -151,6 +152,27 @@ def test_day_07(runner):
         assert result.output == "Part 1: 4\nPart 2: 32\n"
 
 
+def test_day_08(runner):
+    with runner.isolated_filesystem():
+        write_input_file(
+            [
+                "nop +0",
+                "acc +1",
+                "jmp +4",
+                "acc +3",
+                "jmp -3",
+                "acc -99",
+                "acc +1",
+                "jmp -4",
+                "acc +6",
+            ]
+        )
+
+        result = runner.invoke(main, ["8", "input.txt"])
+
+        assert result.output == "Part 1: 5\nPart 2: 8\n"
+
+
 solution_test_data = [
     (1, 989824, 66432240),
     (2, 582, 729),
@@ -159,6 +181,7 @@ solution_test_data = [
     (5, 806, 562),
     (6, 6551, 3358),
     (7, 101, 108636),
+    (8, 1753, 733),
 ]
 
 
