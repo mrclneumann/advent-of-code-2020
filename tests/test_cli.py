@@ -207,6 +207,49 @@ def test_day_09(runner, monkeypatch):
         assert result.output == "Part 1: 127\nPart 2: 62\n"
 
 
+def test_day_10(runner):
+    with runner.isolated_filesystem():
+        write_input_file(
+            [
+                "28",
+                "33",
+                "18",
+                "42",
+                "31",
+                "14",
+                "46",
+                "20",
+                "48",
+                "47",
+                "24",
+                "23",
+                "49",
+                "45",
+                "19",
+                "38",
+                "39",
+                "11",
+                "1",
+                "32",
+                "25",
+                "35",
+                "8",
+                "17",
+                "7",
+                "9",
+                "4",
+                "2",
+                "34",
+                "10",
+                "3",
+            ]
+        )
+
+        result = runner.invoke(main, ["10", "input.txt"])
+
+        assert result.output == "Part 1: 220\nPart 2: 19208\n"
+
+
 solution_test_data = [
     (1, 989824, 66432240),
     (2, 582, 729),
@@ -217,6 +260,7 @@ solution_test_data = [
     (7, 101, 108636),
     (8, 1753, 733),
     (9, 22406676, 2942387),
+    (10, 2048, 1322306994176),
 ]
 
 
