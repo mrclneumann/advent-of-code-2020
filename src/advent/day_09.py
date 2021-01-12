@@ -1,4 +1,6 @@
-PREAMBLE = 25
+from itertools import islice
+
+LEN_PREAMBLE = 25
 
 
 def read_input(file):
@@ -6,23 +8,33 @@ def read_input(file):
 
 
 def part_one(numbers):
-    for index, n in enumerate(numbers[PREAMBLE:], PREAMBLE):
-        if not xmas(numbers[index - PREAMBLE : index], n):
-            return n
+    for window in windows(numbers, LEN_PREAMBLE + 1):
+        if not is_valid(window[:-1], window[-1]):
+            return window[-1]
+
+
+def windows(seq, n):
+    it = iter(seq)
+    result = tuple(islice(it, n))
+    if len(result) == n:
+        yield result
+    for elem in it:
+        result = result[1:] + (elem,)
+        yield result
 
 
 def part_two(numbers):
     n = part_one(numbers)
-    s = contiguous_set(numbers, n)
+    s = find_range_summing_to(numbers, n)
 
     return min(s) + max(s)
 
 
-def xmas(numbers, n):
-    return any(n - x in set(numbers).difference([n]) for x in numbers)
+def is_valid(preamble, next_number):
+    return any(next_number - x in set(preamble) - {next_number} for x in preamble)
 
 
-def contiguous_set(numbers, n):
+def find_range_summing_to(numbers, n):
     i, j = 0, 1
 
     while True:

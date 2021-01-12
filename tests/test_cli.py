@@ -174,7 +174,7 @@ def test_day_08(runner):
 
 
 def test_day_09(runner, monkeypatch):
-    monkeypatch.setattr("advent.day_09.PREAMBLE", 5)
+    monkeypatch.setattr("advent.day_09.LEN_PREAMBLE", 5)
 
     with runner.isolated_filesystem():
         write_input_file(
