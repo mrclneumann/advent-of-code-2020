@@ -1,6 +1,6 @@
 import pytest
 
-from advent.day_09 import is_valid, find_range_summing_to
+from advent.day_09 import is_valid, find_range_summing_to, windows
 
 
 @pytest.mark.parametrize(
@@ -23,3 +23,7 @@ def test_contiguous_set():
         )
         == [1, 2]
     )
+
+
+def test_windows():
+    assert list(windows(range(4), 2)) == [(0, 1), (1, 2), (2, 3)]
