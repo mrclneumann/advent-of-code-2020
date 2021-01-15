@@ -9,23 +9,19 @@ def runner():
     return CliRunner()
 
 
-def write_input_file(lines):
-    with open("input.txt", "w") as f:
-        f.writelines(line + "\n" for line in lines)
-
-
 def test_day_01(runner):
     with runner.isolated_filesystem():
-        write_input_file(
-            [
-                "1721",
-                "979",
-                "366",
-                "299",
-                "675",
-                "1456",
-            ]
-        )
+        with open("input.txt", "w") as f:
+            f.write(
+                """
+1721
+979
+366
+299
+675
+1456
+            """.strip()
+            )
 
         result = runner.invoke(main, ["1", "input.txt"])
 
@@ -34,13 +30,14 @@ def test_day_01(runner):
 
 def test_day_02(runner):
     with runner.isolated_filesystem():
-        write_input_file(
-            [
-                "1-3 a: abcde",
-                "1-3 b: cdefg",
-                "2-9 c: ccccccccc",
-            ]
-        )
+        with open("input.txt", "w") as f:
+            f.write(
+                """
+1-3 a: abcde
+1-3 b: cdefg
+2-9 c: ccccccccc
+            """.strip()
+            )
 
         result = runner.invoke(main, ["2", "input.txt"])
 
@@ -49,21 +46,22 @@ def test_day_02(runner):
 
 def test_day_03(runner):
     with runner.isolated_filesystem():
-        write_input_file(
-            [
-                "..##.......",
-                "#...#...#..",
-                ".#....#..#.",
-                "..#.#...#.#,",
-                ".#...##..#.",
-                "..#.##.....",
-                ".#.#.#....#",
-                ".#........#",
-                "#.##...#...",
-                "#...##....#",
-                ".#..#...#.#",
-            ]
-        )
+        with open("input.txt", "w") as f:
+            f.write(
+                """
+..##.......
+#...#...#..
+.#....#..#.
+..#.#...#.#
+.#...##..#.
+..#.##.....
+.#.#.#....#
+.#........#
+#.##...#...
+#...##....#
+.#..#...#.#
+            """.strip()
+            )
 
         result = runner.invoke(main, ["3", "input.txt"])
 
@@ -72,23 +70,24 @@ def test_day_03(runner):
 
 def test_day_04(runner):
     with runner.isolated_filesystem():
-        write_input_file(
-            [
-                "ecl:gry pid:860033327 eyr:2020 hcl:#fffffd",
-                "byr:1937 iyr:2017 cid:147 hgt:183cm",
-                "",
-                "iyr:2013 ecl:amb cid:350 eyr:2023 pid:028048884",
-                "hcl:#cfa07d byr:1929",
-                "",
-                "hcl:#ae17e1 iyr:2013",
-                "eyr:2024",
-                "ecl:brn pid:760753108 byr:1931",
-                "hgt:179cm",
-                "",
-                "hcl:#cfa07d eyr:2025 pid:166559648",
-                "iyr:2011 ecl:brn hgt:59in",
-            ]
-        )
+        with open("input.txt", "w") as f:
+            f.write(
+                """
+ecl:gry pid:860033327 eyr:2020 hcl:#fffffd
+byr:1937 iyr:2017 cid:147 hgt:183cm
+
+iyr:2013 ecl:amb cid:350 eyr:2023 pid:028048884
+hcl:#cfa07d byr:1929
+
+hcl:#ae17e1 iyr:2013
+eyr:2024
+ecl:brn pid:760753108 byr:1931
+hgt:179cm
+
+hcl:#cfa07d eyr:2025 pid:166559648
+iyr:2011 ecl:brn hgt:59in
+            """.strip()
+            )
 
         result = runner.invoke(main, ["4", "input.txt"])
 
@@ -97,7 +96,14 @@ def test_day_04(runner):
 
 def test_day_05(runner):
     with runner.isolated_filesystem():
-        write_input_file(["BFFFBBFRRR", "FFFBBBFRRR", "BBFFBBFRLL"])
+        with open("input.txt", "w") as f:
+            f.write(
+                """
+BFFFBBFRRR
+FFFBBBFRRR
+BBFFBBFRLL
+            """.strip()
+            )
 
         result = runner.invoke(main, ["5", "input.txt"])
 
@@ -106,25 +112,26 @@ def test_day_05(runner):
 
 def test_day_06(runner):
     with runner.isolated_filesystem():
-        write_input_file(
-            [
-                "abc",
-                "",
-                "a",
-                "b",
-                "c",
-                "",
-                "ab",
-                "ac",
-                "",
-                "a",
-                "a",
-                "a",
-                "a",
-                "",
-                "b",
-            ]
-        )
+        with open("input.txt", "w") as f:
+            f.write(
+                """
+abc
+
+a
+b
+c
+
+ab
+ac
+
+a
+a
+a
+a
+
+b
+            """.strip()
+            )
 
         result = runner.invoke(main, ["6", "input.txt"])
 
@@ -133,19 +140,20 @@ def test_day_06(runner):
 
 def test_day_07(runner):
     with runner.isolated_filesystem():
-        write_input_file(
-            [
-                "light red bags contain 1 bright white bag, 2 muted yellow bags.",
-                "dark orange bags contain 3 bright white bags, 4 muted yellow bags.",
-                "bright white bags contain 1 shiny gold bag.",
-                "muted yellow bags contain 2 shiny gold bags, 9 faded blue bags.",
-                "shiny gold bags contain 1 dark olive bag, 2 vibrant plum bags.",
-                "dark olive bags contain 3 faded blue bags, 4 dotted black bags.",
-                "vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.",
-                "faded blue bags contain no other bags.",
-                "dotted black bags contain no other bags.",
-            ]
-        )
+        with open("input.txt", "w") as f:
+            f.write(
+                """
+light red bags contain 1 bright white bag, 2 muted yellow bags.
+dark orange bags contain 3 bright white bags, 4 muted yellow bags.
+bright white bags contain 1 shiny gold bag.
+muted yellow bags contain 2 shiny gold bags, 9 faded blue bags.
+shiny gold bags contain 1 dark olive bag, 2 vibrant plum bags.
+dark olive bags contain 3 faded blue bags, 4 dotted black bags.
+vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.
+faded blue bags contain no other bags.
+dotted black bags contain no other bags.
+            """.strip()
+            )
 
         result = runner.invoke(main, ["7", "input.txt"])
 
@@ -154,19 +162,20 @@ def test_day_07(runner):
 
 def test_day_08(runner):
     with runner.isolated_filesystem():
-        write_input_file(
-            [
-                "nop +0",
-                "acc +1",
-                "jmp +4",
-                "acc +3",
-                "jmp -3",
-                "acc -99",
-                "acc +1",
-                "jmp -4",
-                "acc +6",
-            ]
-        )
+        with open("input.txt", "w") as f:
+            f.write(
+                """
+nop +0
+acc +1
+jmp +4
+acc +3
+jmp -3
+acc -99
+acc +1
+jmp -4
+acc +6
+            """.strip()
+            )
 
         result = runner.invoke(main, ["8", "input.txt"])
 
@@ -177,30 +186,31 @@ def test_day_09(runner, monkeypatch):
     monkeypatch.setattr("advent.day_09.LEN_PREAMBLE", 5)
 
     with runner.isolated_filesystem():
-        write_input_file(
-            [
-                "35",
-                "20",
-                "15",
-                "25",
-                "47",
-                "40",
-                "62",
-                "55",
-                "65",
-                "95",
-                "102",
-                "117",
-                "150",
-                "182",
-                "127",
-                "219",
-                "299",
-                "277",
-                "309",
-                "576",
-            ]
-        )
+        with open("input.txt", "w") as f:
+            f.write(
+                """
+35
+20
+15
+25
+47
+40
+62
+55
+65
+95
+102
+117
+150
+182
+127
+219
+299
+277
+309
+576
+            """.strip()
+            )
 
         result = runner.invoke(main, ["9", "input.txt"])
 
@@ -209,41 +219,42 @@ def test_day_09(runner, monkeypatch):
 
 def test_day_10(runner):
     with runner.isolated_filesystem():
-        write_input_file(
-            [
-                "28",
-                "33",
-                "18",
-                "42",
-                "31",
-                "14",
-                "46",
-                "20",
-                "48",
-                "47",
-                "24",
-                "23",
-                "49",
-                "45",
-                "19",
-                "38",
-                "39",
-                "11",
-                "1",
-                "32",
-                "25",
-                "35",
-                "8",
-                "17",
-                "7",
-                "9",
-                "4",
-                "2",
-                "34",
-                "10",
-                "3",
-            ]
-        )
+        with open("input.txt", "w") as f:
+            f.write(
+                """
+28
+33
+18
+42
+31
+14
+46
+20
+48
+47
+24
+23
+49
+45
+19
+38
+39
+11
+1
+32
+25
+35
+8
+17
+7
+9
+4
+2
+34
+10
+3
+            """.strip()
+            )
 
         result = runner.invoke(main, ["10", "input.txt"])
 
@@ -252,20 +263,21 @@ def test_day_10(runner):
 
 def test_day_11(runner):
     with runner.isolated_filesystem():
-        write_input_file(
-            [
-                "L.LL.LL.LL",
-                "LLLLLLL.LL",
-                "L.L.L..L..",
-                "LLLL.LL.LL",
-                "L.LL.LL.LL",
-                "L.LLLLL.LL",
-                "..L.L.....",
-                "LLLLLLLLLL",
-                "L.LLLLLL.L",
-                "L.LLLLL.LL",
-            ]
-        )
+        with open("input.txt", "w") as f:
+            f.write(
+                """
+L.LL.LL.LL
+LLLLLLL.LL
+L.L.L..L..
+LLLL.LL.LL
+L.LL.LL.LL
+L.LLLLL.LL
+..L.L.....
+LLLLLLLLLL
+L.LLLLLL.L
+L.LLLLL.LL
+            """.strip()
+            )
 
         result = runner.invoke(main, ["11", "input.txt"])
 
