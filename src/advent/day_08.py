@@ -1,5 +1,12 @@
+from collections import namedtuple
+from typing import Iterable
+
+
 class InfiniteLoopDetected(Exception):
     pass
+
+
+Instruction = namedtuple("Instruction", ["opcode", "argument"])
 
 
 class Interpreter:
@@ -8,7 +15,7 @@ class Interpreter:
         self.accumulator = 0
         self.seen = set()
 
-    def interpret(self, program):
+    def interpret(self, program: Iterable[Instruction]):
         program = list(program)
 
         while True:
@@ -18,14 +25,14 @@ class Interpreter:
             if self.counter in self.seen:
                 raise InfiniteLoopDetected()
 
-            instruction, arg = program[self.counter]
+            opcode, argument = program[self.counter]
 
-            if instruction == "nop":
+            if opcode == "nop":
                 self.nop()
-            elif instruction == "acc":
-                self.acc(arg)
-            elif instruction == "jmp":
-                self.jmp(arg)
+            elif opcode == "acc":
+                self.acc(argument)
+            elif opcode == "jmp":
+                self.jmp(argument)
 
     def nop(self):
         self.seen.add(self.counter)
@@ -46,8 +53,8 @@ def read_input(file):
 
 
 def parse_line(line):
-    instruction, arg = line.strip().split()
-    return instruction, int(arg)
+    name, argument = line.strip().split()
+    return Instruction(name, int(argument))
 
 
 def part_one(program):
@@ -71,10 +78,11 @@ def part_two(program):
 
 
 def alternatives(program):
-    for index, (instruction, arg) in enumerate(program):
-        if instruction in ("nop", "jmp"):
-            yield program[:index] + [(other(instruction), arg)] + program[index + 1 :]
+    for index, instruction in enumerate(program):
+        if instruction.opcode in ("nop", "jmp"):
+            yield program[:index] + [other(instruction)] + program[index + 1 :]
 
 
-def other(instruction):
-    return "nop" if instruction == "jmp" else "jmp"
+def other(instruction: Instruction):
+    opcode = "nop" if instruction.opcode == "jmp" else "jmp"
+    return Instruction(opcode, instruction.argument)

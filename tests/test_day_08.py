@@ -1,6 +1,6 @@
 import pytest
 
-from advent.day_08 import Interpreter, InfiniteLoopDetected
+from advent.day_08 import Interpreter, InfiniteLoopDetected, Instruction
 
 
 @pytest.fixture()
@@ -9,7 +9,7 @@ def interpreter():
 
 
 def test_interpret_nop(interpreter):
-    interpreter.interpret([("nop", 0)])
+    interpreter.interpret([Instruction("nop", 0)])
 
     assert interpreter.counter == 1
     assert interpreter.accumulator == 0
@@ -17,7 +17,7 @@ def test_interpret_nop(interpreter):
 
 
 def test_interpret_acc(interpreter):
-    interpreter.interpret([("acc", 5)])
+    interpreter.interpret([Instruction("acc", 5)])
 
     assert interpreter.counter == 1
     assert interpreter.accumulator == 5
@@ -25,7 +25,7 @@ def test_interpret_acc(interpreter):
 
 
 def test_interpret_jmp(interpreter):
-    interpreter.interpret([("jmp", 2)])
+    interpreter.interpret([Instruction("jmp", 2)])
 
     assert interpreter.counter == 2
     assert interpreter.accumulator == 0
@@ -36,16 +36,16 @@ def test_interpret_program_with_infinite_loop(interpreter):
     with pytest.raises(InfiniteLoopDetected):
         interpreter.interpret(
             [
-                ("nop", +0),
-                ("acc", +1),
-                ("jmp", +4),
-                ("acc", +3),
-                ("jmp", -3),
-                ("acc", -99),
-                ("acc", +1),
-                ("jmp", -4),
-                ("acc", +6),
+                Instruction("nop", +0),
+                Instruction("acc", +1),
+                Instruction("jmp", +4),
+                Instruction("acc", +3),
+                Instruction("jmp", -3),
+                Instruction("acc", -99),
+                Instruction("acc", +1),
+                Instruction("jmp", -4),
+                Instruction("acc", +6),
             ]
         )
 
-        assert interpreter.accumulator == 5
+    assert interpreter.accumulator == 5

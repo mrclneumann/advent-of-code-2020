@@ -250,6 +250,28 @@ def test_day_10(runner):
         assert result.output == "Part 1: 220\nPart 2: 19208\n"
 
 
+def test_day_11(runner):
+    with runner.isolated_filesystem():
+        write_input_file(
+            [
+                "L.LL.LL.LL",
+                "LLLLLLL.LL",
+                "L.L.L..L..",
+                "LLLL.LL.LL",
+                "L.LL.LL.LL",
+                "L.LLLLL.LL",
+                "..L.L.....",
+                "LLLLLLLLLL",
+                "L.LLLLLL.L",
+                "L.LLLLL.LL",
+            ]
+        )
+
+        result = runner.invoke(main, ["11", "input.txt"])
+
+        assert result.output == "Part 1: 37\nPart 2: 26\n"
+
+
 solution_test_data = [
     (1, 989824, 66432240),
     (2, 582, 729),
@@ -261,9 +283,11 @@ solution_test_data = [
     (8, 1753, 733),
     (9, 22406676, 2942387),
     (10, 2048, 1322306994176),
+    (11, 2273, 2064),
 ]
 
 
+@pytest.mark.slow
 @pytest.mark.parametrize(
     "day,part_one,part_two",
     solution_test_data,
