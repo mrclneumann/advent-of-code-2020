@@ -60,24 +60,21 @@ def part_one(program):
 
 
 def part_two(program):
-    for candidate in generate_candidates(program):
+    for p in alternatives(program):
         interpreter = Interpreter()
         try:
-            interpreter.interpret(candidate)
+            interpreter.interpret(p)
         except InfiniteLoopDetected:
             continue
         else:
             return interpreter.accumulator
 
 
-def generate_candidates(program):
+def alternatives(program):
     for index, (instruction, arg) in enumerate(program):
         if instruction in ("nop", "jmp"):
-            yield swap_instruction(program, index)
+            yield program[:index] + [(other(instruction), arg)] + program[index + 1 :]
 
 
-def swap_instruction(program, counter):
-    for index, (instruction, arg) in enumerate(program):
-        if index == counter:
-            instruction = "nop" if instruction == "jmp" else "jmp"
-        yield instruction, arg
+def other(instruction):
+    return "nop" if instruction == "jmp" else "jmp"
