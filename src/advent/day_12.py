@@ -44,15 +44,15 @@ class Ship:
         self.x = x
         self.y = y
 
-        self.degrees = 0
+        self.rotation = 0
 
     @property
     def dx(self):
-        return cos(rad(self.degrees))
+        return cos(rad(self.rotation))
 
     @property
     def dy(self):
-        return sin(rad(self.degrees))
+        return sin(rad(self.rotation))
 
     @property
     def position(self):
@@ -74,10 +74,10 @@ class Ship:
         self.x -= steps
 
     def left(self, degrees):
-        self.degrees += degrees
+        self.rotation += degrees
 
     def right(self, degrees):
-        self.degrees -= degrees
+        self.rotation -= degrees
 
     def forward(self, steps):
         self.x += steps * self.dx
