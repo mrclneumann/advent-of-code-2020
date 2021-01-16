@@ -5,3 +5,4 @@ schema==0.7.2
 numpy==1.19.5
 setuptools==49.2.1
 scipy==1.6.0
+sympy==1.7.1

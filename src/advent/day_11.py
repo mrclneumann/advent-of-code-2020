@@ -8,7 +8,7 @@ floor = "."
 
 
 def read_input(file):
-    return np.array([list(line.strip()) for line in file.readlines()])
+    return np.array([list(line.strip()) for line in file.readlines()], dtype=object)
 
 
 def part_one(grid):
