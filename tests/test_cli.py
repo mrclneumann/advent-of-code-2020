@@ -302,7 +302,6 @@ F11
         assert result.output == "Part 1: 25\nPart 2: 286\n"
 
 
-@pytest.mark.skip
 def test_day_13(runner):
     with runner.isolated_filesystem():
         with open("input.txt", "w") as f:
