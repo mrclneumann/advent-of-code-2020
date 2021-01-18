@@ -314,7 +314,7 @@ def test_day_13(runner):
 
         result = runner.invoke(main, ["13", "input.txt"])
 
-        assert result.output == "Part 1: 295\nPart 2: 0\n"
+        assert result.output == "Part 1: 295\nPart 2: 1068781\n"
 
 
 solution_test_data = [
