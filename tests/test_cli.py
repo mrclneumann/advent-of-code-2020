@@ -284,7 +284,6 @@ L.LLLLL.LL
         assert result.output == "Part 1: 37\nPart 2: 26\n"
 
 
-# @pytest.mark.xfail
 def test_day_12(runner):
     with runner.isolated_filesystem():
         with open("input.txt", "w") as f:
@@ -303,6 +302,22 @@ F11
         assert result.output == "Part 1: 25\nPart 2: 286\n"
 
 
+@pytest.mark.skip
+def test_day_13(runner):
+    with runner.isolated_filesystem():
+        with open("input.txt", "w") as f:
+            f.write(
+                """
+939
+7,13,x,x,59,x,31,19
+            """.strip()
+            )
+
+        result = runner.invoke(main, ["13", "input.txt"])
+
+        assert result.output == "Part 1: 295\nPart 2: 0\n"
+
+
 solution_test_data = [
     (1, 989824, 66432240),
     (2, 582, 729),
@@ -316,6 +331,7 @@ solution_test_data = [
     (10, 2048, 1322306994176),
     (11, 2273, 2064),
     (12, 820, 66614),
+    (13, 3215, 1001569619313439),
 ]
 
 

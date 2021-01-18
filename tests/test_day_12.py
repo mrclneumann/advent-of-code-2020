@@ -87,7 +87,7 @@ def test_interpret(instructions, ship):
 
 def test_read_input(input_path, instructions):
     with input_path.open("r") as f:
-        assert read_input(f) == instructions
+        assert list(read_input(f)) == instructions
 
 
 def test_part_one(instructions):

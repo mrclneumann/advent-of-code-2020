@@ -34,7 +34,7 @@ def part_two(instructions):
 
 def interpret(instructions, item):
     for action, value in instructions:
-        item.__getattribute__(action)(value)
+        getattr(item, action)(value)
 
     return item.manhattan()
 
